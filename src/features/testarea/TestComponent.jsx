@@ -1,27 +1,28 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { Button } from 'semantic-ui-react'
-import {incrementCounter, decrementCounter} from './testactions'
+import {incrementAsync, decrementAsync} from './testactions'
 import {openModal} from '../modals/modalActions'
 const mapState = (state) => ({
-    data: state.test.data
+    data: state.test.data,
+    loading:state.test.loading
 })
 
 const actions = {
-  incrementCounter,
-  decrementCounter,
+  incrementAsync,
+  decrementAsync,
   openModal
 }
 
 class TestComponent extends Component {
   render() {
-    const {incrementCounter, decrementCounter, data, openModal} = this.props
+    const {incrementAsync, decrementAsync, data, openModal, loading} = this.props
     return (
       <div>
         <h1>Test area</h1>
         <h3> answer is {data} </h3>
-        <Button content="Increment" onClick={incrementCounter} color='green'></Button>
-        <Button content="Decrement" onClick={decrementCounter} color='red'></Button>
+        <Button loading={loading} content="Increment" onClick={incrementAsync} color='green'></Button>
+        <Button loading={loading} content="Decrement" onClick={decrementAsync} color='red'></Button>
         <Button content="modal" onClick={() => openModal('TestModal', {data: 43})} color='teal'></Button>
       </div>
     )
