@@ -10,7 +10,7 @@ import UserDetailedPage from '../../features/user/UserDetailed/UserDetailedPage'
 import SettingsDashboard from '../../features/user/Settings/SettingsDashboard';
 import EventForm from '../../features/event/eventform/EventForm';
 import TestComponent from '../../features/testarea/TestComponent';
-// import ModalManager from '../../features/modals/ModalManager';
+import ModalManager from '../../features/modals/ModalManager';
 // import { UserIsAuthenticated } from '../../features/auth/authWrapper';
 // import NotFound from '../../app/layout/NotFound'
 
@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/* <ModalManager/> */}
+        <ModalManager/>
         <Switch>
           <Route exact path="/" component={HomePage} />
         </Switch>
