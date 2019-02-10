@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect } from 'react-redux'
 import { Grid } from 'semantic-ui-react'
 import EventList from '../eventList/EventList'
-import { deleteEvent} from '../eventActions';
+import { cancelToggle} from '../eventActions';
 import LoadingComponent from '../../../app/layout/LoadingComponent'
 import EventActivity from "../EventActivity/EventActivity";
 import {firestoreConnect} from 'react-redux-firebase'
@@ -13,13 +13,13 @@ const mapState = (state) => ({
 })
 
 const actions = {
-  deleteEvent
+  cancelToggle
 }
 
 class EventDashboard extends Component {
 
   handleDeleteEvent = deletedEventId => () => {
-    this.props.deleteEvent(deletedEventId);
+    this.props.cancelToggle(deletedEventId);
   //  const updatedEvents  = this.state.events.filter(event => event.id !== deletedEventId)
   //   this.setState({
   //     events:updatedEvents
