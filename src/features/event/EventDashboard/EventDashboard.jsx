@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import {connect } from 'react-redux'
-import { Grid, Loader } from 'semantic-ui-react'
-import EventList from '../eventList/EventList'
-import { cancelToggle} from '../eventActions';
-import LoadingComponent from '../../../app/layout/LoadingComponent'
-import EventActivity from "../EventActivity/EventActivity";
-import {firestoreConnect} from 'react-redux-firebase'
+import React, { Component } from 'react';
+import { Grid, Loader } from 'semantic-ui-react';
+import { firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import EventList from '../eventList/EventList';
 import { getEventsForDashboard } from '../eventActions';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import EventActivity from '../EventActivity/EventActivity';
 
 const query = [
   {
@@ -52,30 +51,6 @@ class EventDashboard extends Component {
     }
   }
 
-  handleDeleteEvent = deletedEventId => () => {
-    this.props.cancelToggle(deletedEventId);
-  //  const updatedEvents  = this.state.events.filter(event => event.id !== deletedEventId)
-  //   this.setState({
-  //     events:updatedEvents
-  //   })
-  }
-
-  handleUpdateEvent = updatedEvent => {
-    this.props.updateEvent(updatedEvent)
-    const {events} = this.props;
-    this.setState({
-      isOpen:false,
-      selectedEvent:null
-    })
-  }
-
-  handleOpenEvent = eventOpen => () => {
-    this.setState({
-      selectedEvent:eventOpen,
-      isOpen:true
-    })
-  }
-  
   getNextEvents = async () => {
     const { events } = this.props;
     let lastEvent = events && events[events.length - 1];
@@ -88,6 +63,7 @@ class EventDashboard extends Component {
   };
 
   handleContextRef = contextRef => this.setState({contextRef})
+
   render() {
     const { loading, activities } = this.props;
     const { moreEvents, loadedEvents } = this.state;
@@ -117,7 +93,4 @@ class EventDashboard extends Component {
   }
 }
 
-export default connect(mapState, actions)
-(
-  firestoreConnect([{collection: 'events'}])(EventDashboard)
-)
+export default connect(mapState, actions)(firestoreConnect(query)(EventDashboard));
